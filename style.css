@@ -1,0 +1,48 @@
+.colorButtons{
+    height:50px;
+    width:50px;
+    border-width:0px;
+    border-radius:10%;
+}
+
+#container{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+#start{
+    margin:100px;
+}
+
+#red{
+    background-color:rgb(124, 18, 18);
+}
+
+#green{
+    background-color:rgb(7, 69, 7);
+}
+
+#blue{
+    background-color:rgb(4, 4, 90);
+}
+
+#yellow{
+    background-color:rgb(108, 108, 6);
+}
+
+#red:active{
+    background-color:red;
+}
+
+#green:active{
+    background-color:green;
+}
+
+#blue:active{
+    background-color:blue;
+}
+
+#yellow:active{
+    background-color:yellow;
+}
