@@ -11,8 +11,8 @@ flex-direction:column;
 align-items:center;
 }
 
-#start{
-    margin:100px;
+#startButtons button{
+margin:50px;
 }
 
 #red{
