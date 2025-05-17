@@ -6,10 +6,12 @@ let green=document.getElementById("green")
 let blue=document.getElementById("blue")
 let yellow=document.getElementById("yellow")
 let start=document.getElementById("start")
+let lossText=document.getElementById("lossText")
+let lossLevel=document.getElementById("lossLevel")
 let randomColorArray=["red","green","blue","yellow"]
 let sequence=[]
 let userSequence=[]
-
+lossText.innerHTML=""
 function pickColor() {
 let colorIndex=Math.floor(Math.random()*4)
 return randomColorArray[colorIndex]
@@ -24,6 +26,11 @@ function checkNextRound(){
   if (userSequence.length==sequence.length){
     if (checkArrays()){
       gameLoop()
+    }
+    else {
+      console.log("You lost")
+      lossText.innerHTML="You Lost! You got to level "+sequence.length
+      sequence=[]
     }
   }
 }
@@ -84,6 +91,7 @@ async function sleep(ms) {
   }
 
   async function gameLoop(){
+    lossText.innerHTML=""
     userSequence=[]
     addToSequence()
     await flashColors() 
