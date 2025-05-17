@@ -8,9 +8,12 @@ let yellow=document.getElementById("yellow")
 let start=document.getElementById("start")
 let lossText=document.getElementById("lossText")
 let lossLevel=document.getElementById("lossLevel")
+let randomGameStart=document.getElementById("randomGameStart")
 let randomColorArray=["red","green","blue","yellow"]
 let sequence=[]
 let userSequence=[]
+let gameMode=""
+let level=0
 lossText.innerHTML=""
 function pickColor() {
 let colorIndex=Math.floor(Math.random()*4)
@@ -22,6 +25,13 @@ sequence.push(pickColor())
 console.log(sequence)
 }
 
+function createRandomSequence(){
+sequence=[]
+for (let i=0;i<Math.random()*10+1;i++){
+sequence.push(pickColor())
+}
+}
+
 function checkNextRound(){
   if (userSequence.length==sequence.length){
     if (checkArrays()){
@@ -29,7 +39,7 @@ function checkNextRound(){
     }
     else {
       console.log("You lost")
-      lossText.innerHTML="You Lost! You got to level "+sequence.length
+      lossText.innerHTML="You Lost! You got to level "+level
       sequence=[]
     }
   }
@@ -84,15 +94,29 @@ async function flashOneColor(color){
 
 }
 
-start.addEventListener("click",gameLoop)
+start.addEventListener("click",()=>{
+  gameMode="classic"
+  gameLoop()
+})
+
+randomGameStart.addEventListener("click",()=>{
+  gameMode="random"
+  gameLoop()
+})
 
 async function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async function gameLoop(){
+    level++
     lossText.innerHTML=""
     userSequence=[]
+    if (gameMode=="classic"){
     addToSequence()
+    }
+    else {
+      createRandomSequence()
+    }
     await flashColors() 
   }
