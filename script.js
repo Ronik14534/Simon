@@ -8,6 +8,7 @@ let yellow=document.getElementById("yellow")
 let start=document.getElementById("start")
 let lossText=document.getElementById("lossText")
 let lossLevel=document.getElementById("lossLevel")
+let levelText=document.getElementById("levelText")
 let randomGameStart=document.getElementById("randomGameStart")
 let randomColorArray=["red","green","blue","yellow"]
 let sequence=[]
@@ -33,16 +34,13 @@ sequence.push(pickColor())
 }
 
 function checkNextRound(){
-  if (userSequence.length==sequence.length){
-    if (checkArrays()){
-      gameLoop()
-    }
-    else {
-      console.log("You lost")
-      lossText.innerHTML="You Lost! You got to level "+level
+  if (userSequence[userSequence.length-1]!=sequence[userSequence.length-1]){
+   lossText.innerHTML="You Lost! You got to level "+level
       sequence=[]
-    }
-  }
+ }
+ else if(userSequence.length==sequence.length){
+  gameLoop()
+} 
 }
 
 
@@ -95,11 +93,13 @@ async function flashOneColor(color){
 }
 
 start.addEventListener("click",()=>{
+  level=0
   gameMode="classic"
   gameLoop()
 })
 
 randomGameStart.addEventListener("click",()=>{
+  level=0
   gameMode="random"
   gameLoop()
 })
@@ -110,6 +110,7 @@ async function sleep(ms) {
 
   async function gameLoop(){
     level++
+    levelText.innerHTML="Level "+level
     lossText.innerHTML=""
     userSequence=[]
     if (gameMode=="classic"){
